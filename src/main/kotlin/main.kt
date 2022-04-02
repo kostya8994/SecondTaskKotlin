@@ -1,21 +1,22 @@
 fun main() {
-    transfer(100, 10)
-    transfer(1000, 50)
-    transfer(10301, 50)
-    transfer(30000, 80)
-    transfer(90005, 50)
+    println("Перевод суммы: 100.1 руб. Комиссия составит ${transfer(100.1)} руб.")
+    println("Перевод суммы: 1000.5 руб. Комиссия составит ${transfer(1000.5)} руб.")
+    println("Перевод суммы: 10301.5 руб. Комиссия составит ${transfer(10301.5)} руб.")
+    println("Перевод суммы: 30000.8 руб. Комиссия составит ${transfer(30000.8)} руб.")
+    println("Перевод суммы: 90005.50 руб. Комиссия составит ${transfer(90005.50)} руб.")
 }
-fun transfer(rub: Int, kop: Int){
-    val amount = transferToKopecks(rub, kop)
-    println("Перевод суммы: $rub руб. $kop коп.")
-    val comission: Double
+fun transfer(rub: Double) : Double{
+    val amount = transferToKopecks(rub)
     if ((amount * 0.0075) < 3500){
-        comission = 3500.0
+        return transferToRub(3500.0)
     } else{
-        comission = amount * 0.0075
+        return transferToRub(amount * 0.0075)
     }
-    println("Комиссия составляет: $comission коп.")
 }
-fun transferToKopecks(rub: Int, kop: Int): Int {
-    return rub * 100 + kop
+fun transferToKopecks(rub: Double): Int {
+    return (rub * 100).toInt()
+}
+fun transferToRub(kop: Double): Double{
+    //Метод для нормального отображения копеек (двумя цифрами)
+    return (kop.toInt()).toDouble() / 100
 }
